@@ -1,0 +1,14 @@
+---
+layout: base.njk
+---
+{% from "blocks.njk" import section %}
+{% include "sitenav.njk" %}
+<main>
+  <header class="block page-head">
+    <span class="block-index">{{ ("0" + order) if order < 10 else order }}</span>
+    <h1 class="page-title"><span style="view-transition-name: t-{{ page.fileSlug }}">{{ title }}</span></h1>
+    {% if lede %}<p class="lede">{{ lede }}</p>{% endif %}
+  </header>
+  {% if content | trim %}<section class="block"><div class="prose">{{ content | safe }}</div></section>{% endif %}
+  {% for s in sections %}{{ section(s) }}{% endfor %}
+</main>

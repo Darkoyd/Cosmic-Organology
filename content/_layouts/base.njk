@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% if page.url != "/" %}{{ title }} · {% endif %}{{ site.title }}</title>
+<meta name="description" content="{{ description or site.description }}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+
+{% if page.url != "/" %}
+<header class="topbar">
+  <a class="home-mark" href="/"><span class="home-dot" aria-hidden="true"></span>Cosmic Organology</a>
+</header>
+{% endif %}
+
+{{ content | safe }}
+
+<footer class="footer">
+  <p>{{ site.title }}, 2026&ndash;2027</p>
+  <p><a href="mailto:{{ site.contact }}">Contact</a></p>
+</footer>
+
+</body>
+</html>

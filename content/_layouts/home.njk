@@ -1,0 +1,41 @@
+---
+layout: base.njk
+---
+{% from "blocks.njk" import section %}
+<header class="hero hero--graph">
+  <div class="graph" id="graph">
+    <svg class="graph-edges" aria-hidden="true"></svg>
+    <h1 class="graph-center"><span class="home-dot" aria-hidden="true"></span><span class="graph-center-title">COSMIC<br>ORGANOLOGY</span></h1>
+    <ul class="graph-nodes">
+      {% for p in collections.nav %}
+      <li class="node node--{{ p.data.shape or 'circle' }}">
+        <a href="{{ p.url }}"><span class="node-label" style="view-transition-name: t-{{ p.fileSlug }}">{{ p.data.title }}</span></a>
+        <ul class="satellites">
+          {% for s in p.data.sections %}{% if s.heading %}<li><a href="{{ p.url }}#{{ s.heading | slugify }}">{{ s.heading }}</a></li>{% endif %}{% endfor %}
+        </ul>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div class="hero-caption">
+    <p class="hero-subtitle">{{ subtitle }}</p>
+    <p class="hero-tag">{{ tag }}</p>
+  </div>
+</header>
+
+{% if ticker %}
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    {% for i in [1, 2] %}{% for w in ticker %}<span>{{ w }}&nbsp;/&nbsp;</span>{% endfor %}{% endfor %}
+  </div>
+</div>
+{% endif %}
+
+{% include "sitenav.njk" %}
+
+<main>
+  {% if content | trim %}<section class="block"><div class="prose">{{ content | safe }}</div></section>{% endif %}
+  {% for s in sections %}{{ section(s) }}{% endfor %}
+</main>
+
+<script src="/assets/graph.js" defer></script>

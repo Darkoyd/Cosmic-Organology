@@ -1,0 +1,86 @@
+{# One macro renders any entry of a page's `sections:` list. See README for the fields. #}
+{% macro section(s) %}
+<section class="block{% if s.style %} block--{{ s.style }}{% endif %}"{% if s.heading %} id="{{ s.heading | slugify }}"{% endif %}>
+  {% if s.heading %}<h2 class="section-title">{{ s.heading }}</h2>{% endif %}
+  {% if s.text %}<div class="prose">{{ s.text | md | safe }}</div>{% endif %}
+
+  {% if s.image %}
+  <figure class="figure">
+    {% if s.image.src %}<img class="media media--wide" src="{{ s.image.src }}" alt="{{ s.image.alt }}">
+    {% else %}<div class="media media--wide">{{ s.image.alt or "Image" }}</div>{% endif %}
+    {% if s.image.caption %}<figcaption class="caption">{{ s.image.caption }}</figcaption>{% endif %}
+  </figure>
+  {% endif %}
+
+  {% if s.video %}
+  <figure class="figure">
+    {% if s.video.src %}<iframe class="media media--video" src="{{ s.video.src }}" title="{{ s.video.caption }}" allowfullscreen loading="lazy"></iframe>
+    {% else %}<div class="media media--video">Video</div>{% endif %}
+    {% if s.video.caption %}<figcaption class="caption">{{ s.video.caption }}</figcaption>{% endif %}
+  </figure>
+  {% endif %}
+
+  {% if s.cards %}
+  <div class="grid3">
+    {% for c in s.cards %}
+    <div class="card">
+      <div class="card-mark card-mark--{{ c.shape or 'circle' }}"></div>
+      <h3>{{ c.title }}</h3>
+      {{ c.text | md | safe }}
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  {% if s.items %}
+  <div class="items">
+    {% for it in s.items %}
+    <div class="precedent">
+      <p class="precedent-year">{{ it.year }}</p>
+      <h3 class="precedent-title">{% if it.url %}<a href="{{ it.url }}" target="_blank" rel="noopener">{{ it.title }}</a>{% else %}{{ it.title }}{% endif %}</h3>
+      {% if it.by %}<p class="precedent-by">{{ it.by }}</p>{% endif %}
+      {% if it.text %}<div class="precedent-desc">{{ it.text | md | safe }}</div>{% endif %}
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  {% if s.timeline %}
+  <ol class="timeline">
+    {% for t in s.timeline %}
+    <li class="{{ t.status }}">
+      <p class="timeline-date">{{ t.date }}</p>
+      <p class="timeline-title">{{ t.title }}</p>
+      {{ t.text | md | safe }}
+    </li>
+    {% endfor %}
+  </ol>
+  {% endif %}
+
+  {% if s.members %}
+  <div class="members">
+    {% for m in s.members %}
+    <article class="member">
+      <div class="member-media">
+        {% if m.portrait %}<img class="media media--portrait" src="{{ m.portrait }}" alt="{{ m.name }}">{% else %}<div class="media media--portrait">Portrait with project object</div>{% endif %}
+        {% if m.tarot %}<img class="media media--tarot" src="{{ m.tarot }}" alt="Tarot card of {{ m.name }}">{% else %}<div class="media media--tarot">Tarot card</div>{% endif %}
+      </div>
+      <p class="person-name">{% if m.url %}<a href="{{ m.url }}" target="_blank" rel="noopener">{{ m.name }}</a>{% else %}{{ m.name }}{% endif %}</p>
+      <p class="person-role">{{ m.role }}</p>
+      {{ m.text | md | safe }}
+    </article>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  {% if s.logos %}
+  <div class="logos">
+    {% for l in s.logos %}
+    {% if l.url %}<a href="{{ l.url }}" target="_blank" rel="noopener">{% else %}<span>{% endif %}
+      {% if l.image %}<img src="{{ l.image }}" alt="{{ l.name }}">{% else %}{{ l.name }}{% endif %}
+    {% if l.url %}</a>{% else %}</span>{% endif %}
+    {% endfor %}
+  </div>
+  {% endif %}
+</section>
+{% endmacro %}

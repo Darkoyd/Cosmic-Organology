@@ -1,2 +1,18 @@
+# Dependencies and build output (recreate with npm install / npm run build)
 node_modules/
 _site/
+
+# OS and editor clutter
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+.obsidian/
+*.swp
+
+# Secrets (FTP/Bluehost credentials must never be committed)
+.env
+.env.*
+
+# Logs
+npm-debug.log*

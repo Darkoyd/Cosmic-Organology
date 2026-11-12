@@ -72,6 +72,8 @@
   }
 
   function tick() {
+    // Page swapped out in place (nav.js): remember the rotation and stop this loop.
+    if (!graph.isConnected) { try { sessionStorage.setItem("graph-rot", JSON.stringify([rx, ry])); } catch {} return; }
     if (!drag) {
       if (target) {
         rx += (target[0] - rx) * 0.12; ry += (target[1] - ry) * 0.12;

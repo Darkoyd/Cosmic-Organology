@@ -89,7 +89,7 @@ Below the front matter and inside `text:` fields, normal Markdown works: `**bold
 2. Run `npm start`, open http://localhost:8080 and check the changed pages and the home graph. If the terminal shows an error, it names the file and line: usually a tab, a missing quote around a colon, or a misaligned list item.
 3. Search for leftover placeholders: `grep -rn "TODO" content/*.md`.
 4. Before publishing, keep a dated backup of the current `content/` folder (or commit it with git). This is the undo history.
-5. Run `npm run build` and upload the contents of `_site/` to `public_html/` on Bluehost, replacing the old files.
+5. Commit and push to `main` on GitHub: the site builds and publishes itself (see "Publish to Bluehost").
 6. Tell the team it's live and share the updated `.md` files back to the shared folder so everyone starts from the new version.
 
 ## Build and preview
@@ -104,7 +104,20 @@ npm run build      # writes the final site to _site/
 
 ## Publish to Bluehost
 
-1. `npm run build`
-2. Upload the **contents** of `_site/` into `public_html/` (cPanel File Manager or an FTP client such as FileZilla).
+The site lives at **https://cosmic.intervalo.space**. Every push to `main` builds it and uploads `_site/` automatically (`.github/workflows/deploy.yml`, see the repo's *Actions* tab). It can also be run by hand from *Actions → Deploy to Bluehost → Run workflow*.
 
-Links are root-relative (`/desi/`), so the site must live at the domain root. For a subfolder, ask to set Eleventy's `pathPrefix`.
+### One-time setup
+
+1. **Subdomain** (cPanel → *Domains*): create `cosmic.intervalo.space` with document root `public_html/cosmic`. Bluehost hosts the DNS for intervalo.space, so the record is created automatically.
+2. **SSL** (cPanel → *SSL/TLS Status*): run AutoSSL for `cosmic.intervalo.space`.
+3. **FTP account** (cPanel → *FTP Accounts*): create e.g. `deploy@intervalo.space` with directory `public_html/cosmic`, so it can only touch this site.
+4. **GitHub secrets** (repo → *Settings → Secrets and variables → Actions*):
+   - `FTP_SERVER`: `ftp.intervalo.space`
+   - `FTP_USERNAME`: the full FTP username, e.g. `deploy@intervalo.space`
+   - `FTP_PASSWORD`: its password
+
+### Manual fallback
+
+Run `npm run build` and upload the **contents** of `_site/` into `public_html/cosmic/` (cPanel File Manager or FileZilla).
+
+Links are root-relative (`/desi/`), so the site must live at the root of its (sub)domain.

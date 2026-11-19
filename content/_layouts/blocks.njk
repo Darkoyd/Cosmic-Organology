@@ -40,6 +40,7 @@
       <h3 class="precedent-title">{% if it.url %}<a href="{{ it.url }}" target="_blank" rel="noopener">{{ it.title }}</a>{% else %}{{ it.title }}{% endif %}</h3>
       {% if it.by %}<p class="precedent-by">{{ it.by }}</p>{% endif %}
       {% if it.text %}<div class="precedent-desc">{{ it.text | md | safe }}</div>{% endif %}
+      {% if it.images %}<div class="precedent-images">{% for im in it.images %}<img src="{{ im.src }}" alt="{{ im.alt }}" loading="lazy">{% endfor %}</div>{% endif %}
     </div>
     {% endfor %}
   </div>

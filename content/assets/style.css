@@ -473,7 +473,17 @@ main {
   color: var(--grey-dark);
 }
 
-.precedent-desc p { margin: 0; }
+.precedent-desc p { margin: 0 0 0.8em; }
+.precedent-desc > :last-child { margin-bottom: 0; }
+
+.precedent-images {
+  grid-column: 2;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  gap: 0.8rem;
+  margin-top: 1rem;
+}
+.precedent-images img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; }
 
 .precedent-desc {
   grid-column: 2;
@@ -489,7 +499,8 @@ main {
   .precedent-year,
   .precedent-title,
   .precedent-by,
-  .precedent-desc {
+  .precedent-desc,
+  .precedent-images {
     grid-column: 1;
   }
 }

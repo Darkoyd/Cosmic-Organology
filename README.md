@@ -42,7 +42,7 @@ A section has an optional `heading`, an optional `text`, and can hold one or mor
 | Field        | Items look like                                                                     |
 | ------------ | ----------------------------------------------------------------------------------- |
 | `cards`    | `title`, `shape`, `text` (three-column grid)                                  |
-| `items`    | `year`, `title`, `url`, `by`, `text` (press, precedents, talks, podcasts) |
+| `items`    | `year`, `title`, `url`, `by`, `text`, `images` (list of `src`, `alt`) (press, precedents, talks, podcasts) |
 | `timeline` | `date`, `title`, `status` (`done` / `now` / empty), `text`              |
 | `members`  | `name`, `role`, `url`, `portrait`, `tarot`, `text`                      |
 | `logos`    | `name`, `url`, `image`                                                        |

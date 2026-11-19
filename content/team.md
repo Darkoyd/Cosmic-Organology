@@ -19,7 +19,22 @@ sections:
         portrait: ""
         tarot: ""
         text: "[TODO: profile description]"
-      - name: "[TODO: Name]"
+      - name: Maria Jose Mora
+        role: "[TODO: Role]"
+        portrait: ""
+        tarot: ""
+        text: "[TODO: profile description]"
+      - name: Valeria Torres
+        role: "[TODO: Role]"
+        portrait: ""
+        tarot: ""
+        text: "[TODO: profile description]"
+      - name: Sara Maria Londoño Cuéllar
+        role: "[TODO: Role]"
+        portrait: ""
+        tarot: ""
+        text: "[TODO: profile description]"
+      - name: Catalina Londoño Cuéllar
         role: "[TODO: Role]"
         portrait: ""
         tarot: ""

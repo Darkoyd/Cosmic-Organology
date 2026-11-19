@@ -108,16 +108,16 @@ The site lives at **https://cosmic.intervalo.space**. Every push to `main` build
 
 ### One-time setup
 
-1. **Subdomain** (cPanel → *Domains*): create `cosmic.intervalo.space` with document root `public_html/cosmic`. Bluehost hosts the DNS for intervalo.space, so the record is created automatically.
+1. **Subdomain** (cPanel → *Domains*): create `cosmic.intervalo.space` (document root `/home1/interva8/cosmic.intervalo.space`). Bluehost hosts the DNS for intervalo.space, so the record is created automatically.
 2. **SSL** (cPanel → *SSL/TLS Status*): run AutoSSL for `cosmic.intervalo.space`.
-3. **FTP account** (cPanel → *FTP Accounts*): create e.g. `deploy@intervalo.space` with directory `public_html/cosmic`, so it can only touch this site.
+3. **FTP account** (cPanel → *FTP Accounts*): account `gh-deploy@cosmic.intervalo.space` with directory `cosmic.intervalo.space` (the subdomain's document root), so it can only touch this site.
 4. **GitHub secrets** (repo → *Settings → Secrets and variables → Actions*):
-   - `FTP_SERVER`: `ftp.intervalo.space`
-   - `FTP_USERNAME`: the full FTP username, e.g. `deploy@intervalo.space`
+   - `FTP_SERVER`: `box5237.bluehost.com` (not the `ftp.` name cPanel suggests: its certificate only covers `*.bluehost.com`)
+   - `FTP_USERNAME`: the full FTP username, `gh-deploy@cosmic.intervalo.space`
    - `FTP_PASSWORD`: its password
 
 ### Manual fallback
 
-Run `npm run build` and upload the **contents** of `_site/` into `public_html/cosmic/` (cPanel File Manager or FileZilla).
+Run `npm run build` and upload the **contents** of `_site/` into `/home1/interva8/cosmic.intervalo.space/` (cPanel File Manager or FileZilla).
 
 Links are root-relative (`/desi/`), so the site must live at the root of its (sub)domain.
